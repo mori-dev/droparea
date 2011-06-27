@@ -59,7 +59,7 @@
                 progress.html(s.uploaded).fadeOut('slow');
             }, false);
 			
-            xhr.open("post", s.post, true);
+            xhr.open("POST", s.post, true);
             
             // Set appropriate headers
             xhr.setRequestHeader("content-type", "multipart/form-data");
