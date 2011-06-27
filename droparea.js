@@ -62,7 +62,7 @@
             xhr.open("POST", s.post, true);
             
             // Set appropriate headers
-            xhr.setRequestHeader("content-type", "multipart/form-data");
+            xhr.setRequestHeader("Content-Type", "multipart/form-data");
             xhr.setRequestHeader("x-file-name", file.fileName);
             xhr.setRequestHeader("x-file-size", file.fileSize);
             xhr.setRequestHeader("x-file-type", file.type);
