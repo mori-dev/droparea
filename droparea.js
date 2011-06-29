@@ -1,8 +1,9 @@
 (function($){
 
-    $.fn.droparea = function(user_config) {
+    $.fn.droparea = function(options) {
 
-       var methods = {
+       var dnd = {},
+           methods = {
 
            init     : function(e){},
            start    : function(e){},
@@ -70,7 +71,7 @@
            }
        };
 
-       var dnd = {
+       var default_options = {
             'init'         : methods.init,
             'start'        : methods.start,
             'complete'     : methods.complete,
@@ -87,8 +88,10 @@
 
         return this.each(function() {
 
-            if(user_config) {
-                $.extend({}, o, user_config);
+            if(options) {
+                dnd = $.extend({}, default_options, options);
+            } else {
+                dnd = $.extend({}, default_options);
             }
 
             var instructions = $('<div>').appendTo($(this));
