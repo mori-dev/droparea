@@ -1,5 +1,7 @@
 (function($){
 
+    jQuery.event.props.push("dataTransfer");
+
     $.fn.droparea = function(options) {
 
         var dnd = {},
@@ -76,6 +78,7 @@
                  'start'        : methods.start,
                  'complete'     : methods.complete,
                  'error'        : methods.error,
+                 'traverse'     : methods.traverse,
                  'instructions' : 'ここにファイルをドロップして下さい',
                  'over'         : 'ここはドロップできる領域です',
                  'nosupport'    : 'File API に対応していません',
@@ -102,6 +105,7 @@
                     instructions.addClass('instructions').html(dnd.instructions);
                 }
 
+
                 $(this).bind({
 
                     dragleave: function (e) {
@@ -120,19 +124,16 @@
 
                     dragover: function (e) {
                         e.preventDefault();
+                    },
+
+                    drop: function (e) {
+                        e.preventDefault();
+                        dnd.start($(this));
+                        dnd.traverse(e.dataTransfer.files, $(this));
+                        instructions.removeClass().empty();
                     }
 
                 });
-
-                this.addEventListener('drop', function (e) {
-
-                    e.preventDefault();
-                    dnd.start($(this));
-                    methods.traverse(e.dataTransfer.files, $(this));
-                    instructions.removeClass().empty();
-
-                }, false);
-
             });
     };
 })(jQuery);
